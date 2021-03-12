@@ -1,4 +1,21 @@
 html,
 body {
   margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
+  height: 100%;
+  width: 100%;
+}
+
+.app {
+  height: 100%;
+}
+
+#header {
+  background-color: rgb(255, 255, 138); /* temporary, just for testing, please change */
+}
+
+#main-body {
+  margin: 0 5%; /* gray margins */
+  height: 100%;
 }

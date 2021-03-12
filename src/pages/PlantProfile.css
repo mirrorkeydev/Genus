@@ -1,0 +1,58 @@
+.plant-profile {
+  position: relative;
+  z-index: 0;
+  background-color: white;
+  height: 90%;
+}
+
+#title-img {
+  object-fit: cover;
+  width: 230px;
+  height: 230px;
+}
+
+.title-container {
+  margin: 3rem 0 0 3rem;
+  display: flex;
+}
+
+.title-text {
+  padding: 0 2rem;
+}
+
+.title-text h2,
+.title-text h4 {
+  margin: 0 0 1rem 0;
+  color: white;
+}
+
+.icon {
+  height: 1.5rem;
+  filter: invert(); /* don't @ me */
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.body-container {
+  padding: 1rem 3rem 3rem 3rem;
+}
+
+#background-img {
+  filter: brightness(0.4);
+  object-fit: cover;
+  width: 100%;
+  height: 220px;
+  position: absolute;
+  z-index: -1;
+  top: -3rem;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+  font-size: 2rem;
+}
