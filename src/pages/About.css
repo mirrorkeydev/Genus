@@ -1,0 +1,25 @@
+.about-page {
+  background-color: white;
+  height: 100%;
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  padding: 2rem;
+}
+
+.img-container {
+  padding: 40px;
+  flex: 0 1 300px;
+}
+
+#genus {
+  max-width: 100%;
+}
+
+.words-container {
+  flex: 0 1 400px;
+}
