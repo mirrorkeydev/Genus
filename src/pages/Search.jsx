@@ -60,6 +60,12 @@ export default function Search({ query }) {
           <button type="submit">Search</button>
         </form>
         <h2>Search query: {query}</h2>
+        {isLoading
+          ? (<Spinner />
+            )
+          : (
+          <p>{species.data}</p>
+            )}
         </div>
     )
   }
