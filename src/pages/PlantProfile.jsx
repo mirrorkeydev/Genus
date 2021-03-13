@@ -21,7 +21,12 @@ export default function PlantProfile() {
 
   useEffect(() => {
     const getPlantData = async() => {
-      const res = await fetch(`https://trefle.io/api/v1/plants/${plantid}?token=${process.env.REACT_APP_API_KEY}`)
+      const res = await fetch(`https://genus-proxy.vercel.app/api/v1/plants/${plantid}`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
+          }
+        })
       if (res.status !== 200) {
         console.error(res.statusText)
         setError(true)
