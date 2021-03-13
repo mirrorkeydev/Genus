@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useHistory, Redirect } from 'react-router-dom'
 import fetch from 'isomorphic-unfetch'
 import Spinner from '../components/Spinner'
+import SpeciesDisplay from '../components/SpeciesDisplay'
 
 export default function Search({ query }) {
   const [inputQuery, setInputQuery] = useState(query || '')
@@ -64,7 +65,13 @@ export default function Search({ query }) {
           ? (<Spinner />
             )
           : (
-          <p>{species.data}</p>
+          <ul>
+          {species.map(specie => (
+            <li key={specie.id}>
+            <SpeciesDisplay id={specie.id} name={specie.scientific_name} icon={specie.image_url}/>
+            </li>
+          ))}
+          </ul>
             )}
         </div>
     )
