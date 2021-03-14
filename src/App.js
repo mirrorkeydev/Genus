@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route, Link, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { loadBookmarks } from './redux/actions'
@@ -7,12 +7,17 @@ import { getBookmarks } from './redux/selectors'
 
 import './App.css'
 
+import queryString from 'query-string'
 import About from './pages/About'
 import Bookmarks from './pages/Bookmarks'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import PlantProfile from './pages/PlantProfile'
 import Search from './pages/Search'
+
+function useQueryString() {
+  return queryString.parse(useLocation().search)
+}
 
 export default function App() {
   const dispatch = useDispatch()
@@ -57,7 +62,7 @@ export default function App() {
             <Bookmarks />
           </Route>
           <Route path="/search">
-            <Search />
+            <Search query={useQueryString().q} />
           </Route>
           <Route path="/plantprofile/:plantId">
             <PlantProfile />
