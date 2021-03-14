@@ -26,6 +26,10 @@ export default function Search({ query }) {
           })
         responseBody = await res.json()
         console.log('RESPONSE ==', responseBody)
+        if (res.status !== 200) {
+          console.error(res.statusText)
+          setIsError(true)
+        }
       } catch (e) {
         if (e instanceof DOMException) {
           console.log('ERRROR')
@@ -68,7 +72,7 @@ export default function Search({ query }) {
           <ul>
           {species.map(specie => (
             <li key={specie.id}>
-            <SpeciesDisplay id={specie.id} name={specie.scientific_name} icon={specie.image_url}/>
+            <SpeciesDisplay name={specie.scientific_name} icon={specie.image_url} link={'/plantprofile/' + specie.id}/>
             </li>
           ))}
           </ul>
