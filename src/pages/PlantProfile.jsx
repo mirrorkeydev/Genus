@@ -1,5 +1,10 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Redirect, useParams } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { addBookmark, removeBookmark } from '../redux/actions'
+import { getEntityIsBookmarkedById } from '../redux/selectors'
+
 import './PlantProfile.css'
 import BookmarkClear from '../assets/bookmark_clear.svg'
 import BookmarkOpaque from '../assets/bookmark_opaque.svg'
@@ -14,14 +19,22 @@ function toTitleCase(str) {
 }
 
 export default function PlantProfile() {
-  const { plantid } = useParams()
+  const dispatch = useDispatch()
+  let { plantId } = useParams()
+
+  plantId = parseInt(plantId)
+
+  const bookmarked = useSelector(getEntityIsBookmarkedById(plantId))
+
   const [data, setData] = useState(null)
   const [error, setError] = useState(false)
-  const [bookmarked, setBookmarked] = useState(false) // useBookmark hook?
+
+  const handleAddBookmark = () => dispatch(addBookmark(plantId))
+  const handleRemoveBookmark = () => dispatch(removeBookmark(plantId))
 
   useEffect(() => {
     const getPlantData = async() => {
-      const res = await fetch(`https://genus-proxy.vercel.app/api/v1/plants/${plantid}`,
+      const res = await fetch(`https://genus-proxy.vercel.app/api/v1/plants/${plantId}`,
         {
           headers: {
             Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
@@ -37,7 +50,9 @@ export default function PlantProfile() {
   }, [])
 
   if (error) {
-    return <Redirect to='/notfound' />
+    return (
+      <Redirect to='/notfound' />
+    )
   }
 
   if (data) {
@@ -52,8 +67,8 @@ export default function PlantProfile() {
             <h2>{data.common_name ? toTitleCase(data.common_name) : data.scientific_name}</h2>
             <h4>{data.common_name ? data.scientific_name : ''}</h4>
             { !bookmarked
-              ? <img className="icon" src={BookmarkClear} alt="bookmark" onClick={e => { setBookmarked(true) }}/>
-              : <img className="icon" src={BookmarkOpaque} alt="unbookmark" onClick={e => { setBookmarked(false) }}/>
+              ? <img className="icon" src={BookmarkClear} alt="bookmark" onClick={handleAddBookmark}/>
+              : <img className="icon" src={BookmarkOpaque} alt="unbookmark" onClick={handleRemoveBookmark}/>
             }
           </div>
         </div>
@@ -65,6 +80,8 @@ export default function PlantProfile() {
       </div>
     )
   } else {
-    return <div className="loading"><p>Loading...</p></div>
+    return (
+      <div className="loading"><p>Loading...</p></div>
+    )
   }
 }
