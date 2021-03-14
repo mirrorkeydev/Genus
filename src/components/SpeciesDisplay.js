@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './SpeciesDisplay.css'
 
-function SpeciesDisplay (props) {
+function SpeciesDisplay(props) {
   return (
     <div className ="card">
     <img className="imgRes" src={props.icon}/>
