@@ -1,10 +1,22 @@
+import { v4 } from 'uuid'
+
 export const LOAD_BOOKMARKS = 'LOAD_BOOKMARKS'
 export const ADD_BOOKMARK = 'ADD_BOOKMARK'
 export const REMOVE_BOOKMARK = 'REMOVE_BOOKMARK'
 
+let currentContextUUID = null
+
+export function getContextUniqueIdentifier() {
+  if (!currentContextUUID) {
+    currentContextUUID = v4()
+  }
+  return currentContextUUID
+}
+
 export function loadBookmarks(bookmarks) {
   return {
     type: LOAD_BOOKMARKS,
+    caller: getContextUniqueIdentifier(),
     bookmarks
   }
 }
@@ -12,6 +24,7 @@ export function loadBookmarks(bookmarks) {
 export function addBookmark(id) {
   return {
     type: ADD_BOOKMARK,
+    caller: getContextUniqueIdentifier(),
     id
   }
 }
@@ -19,6 +32,7 @@ export function addBookmark(id) {
 export function removeBookmark(id) {
   return {
     type: REMOVE_BOOKMARK,
+    caller: getContextUniqueIdentifier(),
     id
   }
 }

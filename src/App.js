@@ -1,9 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Switch, Route, Link, useLocation } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-
-import { loadBookmarks } from './redux/actions'
-import { getBookmarks } from './redux/selectors'
 
 import './App.css'
 
@@ -20,28 +16,6 @@ function useQueryString() {
 }
 
 export default function App() {
-  const dispatch = useDispatch()
-  const bookmarks = useSelector(getBookmarks)
-
-  const handleStorageChanged = () => {
-    const data = localStorage.getItem('bookmarks')
-    const bookmarks = data ? JSON.parse(data) : []
-    dispatch(loadBookmarks(bookmarks))
-  }
-
-  useEffect(() => {
-    handleStorageChanged()
-    window.addEventListener('storage', handleStorageChanged)
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChanged)
-    }
-  }, [dispatch])
-
-  useEffect(() => {
-    localStorage.setItem('bookmarks', JSON.stringify(bookmarks))
-  }, [bookmarks])
-
   return (
     <div className="app">
       <div id="header">
