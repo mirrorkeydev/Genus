@@ -1,24 +1,42 @@
-import { ADD_BOOKMARK, LOAD_BOOKMARKS, REMOVE_BOOKMARK } from './actions'
+import { withReduxStateSync } from 'redux-state-sync'
 
-export const initialState = []
+import { ADD_BOOKMARK, LOAD_BOOKMARKS, REMOVE_BOOKMARK, getContextUniqueIdentifier } from './actions'
+
+export const initialState = JSON.parse(localStorage.getItem('bookmarks')) || []
 
 function rootReducer(state = initialState, action) {
-  let newState = state
+  let newState = null
   switch (action.type) {
     case LOAD_BOOKMARKS:
-      return action.bookmarks
+      newState = action.bookmarks
+      break
     case ADD_BOOKMARK:
       if (state.indexOf(action.id) === -1) {
         newState = [action.id, ...state]
-        return newState
-      } else {
-        return state
       }
+      break
     case REMOVE_BOOKMARK:
       newState = state.filter(item => item !== action.id)
-      return newState
-    default: return state
+      break
+    default:
+      break
+  }
+
+  if (newState !== null) {
+    console.log('The state has changed.\n\tFrom:', state, '\n\tTo:', newState)
+    console.log('The action was spawned by:', action.caller)
+    console.log('The current context is:', getContextUniqueIdentifier())
+    // Save the new state to localStorage only if the action was spawned by the current tab.
+    if (action.caller === getContextUniqueIdentifier()) {
+      console.log('Calling context! Saving...')
+      localStorage.setItem('bookmarks', JSON.stringify(newState))
+    } else {
+      console.log('Non-calling context. Ignoring save.')
+    }
+    return newState
+  } else {
+    return state
   }
 }
 
-export default rootReducer
+export default withReduxStateSync(rootReducer)
