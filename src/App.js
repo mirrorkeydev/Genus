@@ -2,15 +2,21 @@ import './App.css'
 import {
   Switch,
   Route,
-  Link
+  Link,
+  useLocation
 } from 'react-router-dom'
 
+import queryString from 'query-string'
 import About from './pages/About'
 import Bookmarks from './pages/Bookmarks'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import PlantProfile from './pages/PlantProfile'
 import Search from './pages/Search'
+
+function useQueryString() {
+  return queryString.parse(useLocation().search)
+}
 
 export default function App() {
   return (
@@ -33,7 +39,7 @@ export default function App() {
             <Bookmarks />
           </Route>
           <Route path="/search">
-            <Search />
+            <Search query={useQueryString().q} />
           </Route>
           <Route path="/plantprofile/:plantid">
             <PlantProfile />
