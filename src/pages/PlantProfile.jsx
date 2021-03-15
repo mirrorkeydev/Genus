@@ -56,7 +56,7 @@ export default function PlantProfile() {
           <div className="title-text">
             <h2>{data.common_name ? toTitleCase(data.common_name) : data.scientific_name}</h2>
             <h4>{data.common_name ? data.scientific_name : ''}</h4>
-            <BookmarkButton plantId={plantId}/>
+            <BookmarkButton plantId={plantId} data={{ common_name: data.common_name, scientific_name: data.scientific_name, image_url: data.image_url }}/>
           </div>
         </div>
         <div className="body-container">

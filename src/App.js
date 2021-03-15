@@ -55,7 +55,7 @@ export default function App() {
         <nav>
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
-          <Link to="/bookmarks">Saved</Link>
+          <Link to="/saved">Saved</Link>
         </nav>
       </header>
       <main>
@@ -66,7 +66,7 @@ export default function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/bookmarks">
+          <Route path="/saved">
             <Bookmarks />
           </Route>
           <Route path="/search">

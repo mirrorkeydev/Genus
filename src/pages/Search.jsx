@@ -5,7 +5,7 @@ import fetch from 'isomorphic-unfetch'
 import './Search.css'
 
 import Spinner from '../components/Spinner'
-import SpeciesDisplay from '../components/SpeciesCard'
+import SpeciesCard from '../components/SpeciesCard'
 
 export default function Search({ query }) {
   const [inputQuery, setInputQuery] = useState(query || '')
@@ -76,11 +76,11 @@ export default function Search({ query }) {
           {isLoading
             ? <></>
             : <>
-              { species.map(item => <SpeciesDisplay name={item.common_name} scientific={item.scientific_name} image={item.image_url} plantId={item.id} key={item.id}/>) }
+              { species.map(item => <SpeciesCard name={item.common_name} scientific={item.scientific_name} image={item.image_url} plantId={item.id} key={item.id}/>) }
             </>
           }
         </div>
-        </div>
+      </div>
     )
   }
 }
