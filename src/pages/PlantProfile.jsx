@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Redirect, useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-
-import { addBookmark, removeBookmark } from '../redux/actions'
-import { getEntityIsBookmarkedById } from '../redux/selectors'
 
 import './PlantProfile.css'
-import BookmarkClear from '../assets/bookmark_clear.svg'
-import BookmarkOpaque from '../assets/bookmark_opaque.svg'
 import GenericPlant from '../assets/generic_plant_opaque.png'
 import GenericBackground from '../assets/generic_background.png'
+
+import BookmarkButton from '../components/BookmarkButton'
 
 // https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
 function toTitleCase(str) {
@@ -19,18 +15,12 @@ function toTitleCase(str) {
 }
 
 export default function PlantProfile() {
-  const dispatch = useDispatch()
   let { plantId } = useParams()
 
   plantId = parseInt(plantId)
 
-  const bookmarked = useSelector(getEntityIsBookmarkedById(plantId))
-
   const [data, setData] = useState(null)
   const [error, setError] = useState(false)
-
-  const handleAddBookmark = () => dispatch(addBookmark(plantId))
-  const handleRemoveBookmark = () => dispatch(removeBookmark(plantId))
 
   useEffect(() => {
     const getPlantData = async() => {
@@ -66,10 +56,7 @@ export default function PlantProfile() {
           <div className="title-text">
             <h2>{data.common_name ? toTitleCase(data.common_name) : data.scientific_name}</h2>
             <h4>{data.common_name ? data.scientific_name : ''}</h4>
-            { !bookmarked
-              ? <img className="icon" src={BookmarkClear} alt="bookmark" onClick={handleAddBookmark}/>
-              : <img className="icon" src={BookmarkOpaque} alt="unbookmark" onClick={handleRemoveBookmark}/>
-            }
+            <BookmarkButton plantId={plantId}/>
           </div>
         </div>
         <div className="body-container">

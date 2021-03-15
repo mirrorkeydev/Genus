@@ -1,6 +1,7 @@
 .spinner {
-  display: inline-block;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes bounce-delay {
@@ -21,7 +22,7 @@
   width: 12px;
   height: 12px;
   margin: 6px; /* (width / 2) or (height / 2) */
-  background-color: #ffff8a;
+  background-color: black;
   animation: bounce-delay infinite 1.4s ease-in-out both;
 }
 

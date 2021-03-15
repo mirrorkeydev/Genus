@@ -1,9 +1,11 @@
-import React from 'react'
-import { Switch, Route, Link, useLocation } from 'react-router-dom'
+import React, { useState } from 'react'
+import queryString from 'query-string'
+import { Switch, Route, Link, useLocation, useHistory } from 'react-router-dom'
 
 import './App.css'
+import Logo from './assets/genus.svg'
+import MagnifyingGlass from './assets/magnifying_glass.svg'
 
-import queryString from 'query-string'
 import About from './pages/About'
 import Bookmarks from './pages/Bookmarks'
 import Home from './pages/Home'
@@ -16,15 +18,47 @@ function useQueryString() {
 }
 
 export default function App() {
+  const [searchValue, setSearchValue] = useState('')
+  const history = useHistory()
+
+  const handleSearchChange = (e) => {
+    setSearchValue(e.target.value)
+  }
+
+  const submitSearch = () => {
+    if (searchValue.trim() !== '') {
+      history.push(`/search?q=${encodeURIComponent(searchValue)}`)
+      setSearchValue('')
+    }
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      submitSearch()
+    }
+    return true
+  }
+
   return (
     <div className="app">
-      <div id="header">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/search">Search</Link>
-        <Link to="/bookmarks">Saved</Link>
-      </div>
-      <div id="main-body">
+      <header>
+        <div className="header-inner">
+          <div className="header-search">
+            <input value={searchValue} onChange={handleSearchChange} onKeyDown={handleKeyDown} placeholder="Search species & more"/>
+            <div className="submit-button" aria-role="button" onClick={submitSearch}>
+              <img src={MagnifyingGlass} alt="Click to search"></img>
+            </div>
+          </div>
+          <img src={Logo} alt="Genus Logo"/>
+          <div className="header-saved"></div>
+        </div>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/bookmarks">Saved</Link>
+        </nav>
+      </header>
+      <main>
         <Switch>
           <Route exact path="/">
             <Home />
@@ -38,14 +72,14 @@ export default function App() {
           <Route path="/search">
             <Search query={useQueryString().q} />
           </Route>
-          <Route path="/plantprofile/:plantId">
+          <Route path="/plant/:plantId">
             <PlantProfile />
           </Route>
           <Route path={['*', '/notfound']}>
             <NotFound />
           </Route>
         </Switch>
-      </div>
+      </main>
     </div>
   )
 }

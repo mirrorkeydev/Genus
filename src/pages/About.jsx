@@ -2,7 +2,7 @@ import Genus from '../assets/genus.png'
 import './About.css'
 
 export default function About() {
-  return (<div className="about-page">
+  return <div className="about-page">
     <div className="about-container">
       <div className="words-container">
         <h2>About Genus</h2>
@@ -22,5 +22,5 @@ export default function About() {
         <img id="genus" src={Genus} alt="Genus wordmark"/>
       </div>
     </div>
-  </div>)
+  </div>
 }

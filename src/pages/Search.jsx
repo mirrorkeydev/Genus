@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useHistory, Redirect } from 'react-router-dom'
 import fetch from 'isomorphic-unfetch'
+
+import './Search.css'
+
 import Spinner from '../components/Spinner'
-import SpeciesDisplay from '../components/SpeciesDisplay'
+import SpeciesDisplay from '../components/SpeciesCard'
 
 export default function Search({ query }) {
   const [inputQuery, setInputQuery] = useState(query || '')
@@ -18,14 +21,12 @@ export default function Search({ query }) {
       setIsLoading(true)
       setIsError(false)
       try {
-        const res = await fetch(`https://genus-proxy.vercel.app/api/v1/plants/search?q=${query}`,
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
-            }
-          })
+        const res = await fetch(`https://genus-proxy.vercel.app/api/v1/plants/search?q=${query}`, {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
+          }
+        })
         responseBody = await res.json()
-        console.log('RESPONSE ==', responseBody)
         if (res.status !== 200) {
           console.error(res.statusText)
           setIsError(true)
@@ -56,27 +57,29 @@ export default function Search({ query }) {
 
   if (!isError) {
     return (
-      <div>
-        <form onSubmit={(e) => {
+      <div className="search-page">
+        <form className="search-form" onSubmit={(e) => {
           e.preventDefault()
           history.push(`?q=${inputQuery}`)
         }}>
           <input value={inputQuery} onChange={e => setInputQuery(e.target.value)} />
           <button type="submit">Search</button>
         </form>
-        <h2>Search query: {query}</h2>
-        {isLoading
-          ? (<Spinner />
-            )
-          : (
-          <ul>
-          {species.map(specie => (
-            <li key={specie.id}>
-            <SpeciesDisplay name={specie.scientific_name} icon={specie.image_url} link={'/plantprofile/' + specie.id}/>
-            </li>
-          ))}
-          </ul>
-            )}
+        <div className="results-header">
+          <h2>&ldquo;{query}&rdquo;</h2>
+          <div className="results-label">
+            All results
+          </div>
+        </div>
+        {isLoading && <Spinner />}
+        <div className="results-grid">
+          {isLoading
+            ? <></>
+            : <>
+              { species.map(item => <SpeciesDisplay name={item.common_name} scientific={item.scientific_name} image={item.image_url} plantId={item.id} key={item.id}/>) }
+            </>
+          }
+        </div>
         </div>
     )
   }
