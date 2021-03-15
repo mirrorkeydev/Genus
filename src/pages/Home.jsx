@@ -8,7 +8,7 @@ export default function Home() {
           <div className="news-header">
             NEWS
           </div>
-          <h2 className="news-title">Lithos split up after 5 years</h2>
+          <h2 className="news-title">Lithops split up after 5 years</h2>
           <p>
             It&apos;s a succulent joke, haha. Get it, guys?
             &apos;Cause Lithops take so long to bloom?
