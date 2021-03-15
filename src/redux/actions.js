@@ -21,18 +21,20 @@ export function loadBookmarks(bookmarks) {
   }
 }
 
-export function addBookmark(id) {
+export function addBookmark(id, data = {}) {
   return {
     type: ADD_BOOKMARK,
     caller: getContextUniqueIdentifier(),
-    id
+    id,
+    data
   }
 }
 
-export function removeBookmark(id) {
+export function removeBookmark(id, data = {}) {
   return {
     type: REMOVE_BOOKMARK,
     caller: getContextUniqueIdentifier(),
-    id
+    id,
+    data
   }
 }

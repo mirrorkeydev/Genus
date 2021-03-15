@@ -7,19 +7,19 @@ import { getEntityIsBookmarkedById } from '../redux/selectors'
 import BookmarkClear from '../assets/bookmark_clear.svg'
 import BookmarkOpaque from '../assets/bookmark_opaque.svg'
 
-export default function BookmarkButton({ plantId }) {
+export default function BookmarkButton({ plantId, data }) {
   const dispatch = useDispatch()
 
   const bookmarked = useSelector(getEntityIsBookmarkedById(plantId))
 
   const handleAddBookmark = (e) => {
     e.preventDefault()
-    dispatch(addBookmark(plantId))
+    dispatch(addBookmark(plantId, data))
   }
 
   const handleRemoveBookmark = (e) => {
     e.preventDefault()
-    dispatch(removeBookmark(plantId))
+    dispatch(removeBookmark(plantId, data))
   }
 
   return (

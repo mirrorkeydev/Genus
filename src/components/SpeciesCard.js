@@ -10,7 +10,7 @@ function SpeciesCard(props) {
   const scientific = props.name ? props.scientific : ''
 
   return (
-    <Link to={{ pathname: `/plant/${props.plantId} ` }}>
+    <Link to={{ pathname: `/plant/${props.plantId}` }}>
       <div className="species-card">
         <picture className="species-image">
           <source srcSet={props.image}/>
@@ -22,7 +22,7 @@ function SpeciesCard(props) {
             <div className="species-scientific">{scientific}</div>
           </div>
           <div className="species-bookmark">
-            <BookmarkButton plantId={props.plantId}/>
+            <BookmarkButton plantId={props.plantId} data={{ common_name: props.name, scientific_name: props.scientific, image_url: props.image }}/>
           </div>
         </div>
       </div>

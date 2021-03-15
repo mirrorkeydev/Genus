@@ -11,12 +11,13 @@ function rootReducer(state = initialState, action) {
       newState = action.bookmarks
       break
     case ADD_BOOKMARK:
-      if (state.indexOf(action.id) === -1) {
-        newState = [action.id, ...state]
+      console.log('DATA:', action)
+      if (!state.some(item => item.id === action.id)) {
+        newState = [{ id: action.id, data: action.data }, ...state]
       }
       break
     case REMOVE_BOOKMARK:
-      newState = state.filter(item => item !== action.id)
+      newState = state.filter(item => item.id !== action.id)
       break
     default:
       break
