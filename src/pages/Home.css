@@ -1,0 +1,47 @@
+.news-container {
+  display: flex;
+  justify-content: center;
+}
+
+.news-img {
+  flex: 0 1 400px;
+  padding: 0.75rem 1.25rem;
+}
+
+img {
+  max-width: 100%;
+}
+
+.news-text {
+  flex: 0 1 400px;
+}
+
+.news-header {
+  overflow: hidden;
+}
+
+.news-header::after {
+  content: "";
+  display: inline-block;
+  height: 0.5em;
+  vertical-align: bottom;
+  width: 100%;
+  margin-right: -100%;
+  margin-left: 10px;
+  border-top: 1px solid black;
+}
+
+.home-page {
+  background-color: white;
+  padding: 5vh 0;
+  flex-grow: 1;
+}
+
+.light {
+  color: grey;
+}
+
+.news-title {
+  line-height: 2rem;
+  margin: 1rem 0;
+}
