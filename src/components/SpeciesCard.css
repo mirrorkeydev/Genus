@@ -1,0 +1,63 @@
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.species-card {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto;
+  grid-template-areas: 'main';
+  align-items: flex-end;
+  font-size: 1.125rem;
+}
+
+.species-image {
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  grid-area: main;
+  background: #f2f2f2;
+  background-size: contain;
+  margin-bottom: -6.5px;
+}
+
+.species-image-placeholder {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.species-overlay {
+  grid-area: main;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.5rem;
+  color: white;
+  display: flex;
+  flex-direction: row;
+}
+
+.species-common {
+}
+
+.species-scientific {
+  font-size: 0.9rem;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.species-bookmark {
+  flex-grow: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  margin-left: 0.5rem;
+}
+
+.species-bookmark img {
+  margin-top: 0.05rem;
+}

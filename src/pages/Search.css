@@ -1,0 +1,30 @@
+.search-form {
+  display: none;
+}
+
+.results-header {
+  text-align: center;
+  margin: 2.25rem 0;
+}
+
+h2 {
+  font-size: 2.25em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.results-label {
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: .875rem;
+}
+
+.results-grid {
+  display: grid;
+  width: calc(100% - 2rem);
+  grid-auto-rows: max-content;
+  grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
+  grid-gap: 1rem;
+  margin: 0 1rem 2.25rem 1rem;
+  justify-content: center;
+}
