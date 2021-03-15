@@ -15,8 +15,8 @@ h2 {
 
 .results-label {
   text-transform: uppercase;
-  letter-spacing: .04em;
-  font-size: .875rem;
+  letter-spacing: 0.04em;
+  font-size: 0.875rem;
 }
 
 .results-grid {
