@@ -1,0 +1,15 @@
+:root {
+  --brand-color: #ffff64;
+}
+
+.intro{
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+ .intro img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffff64;
+}
